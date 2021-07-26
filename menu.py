@@ -4,10 +4,10 @@ from os import name as os_name
 
 
 def clear():
-    if os_name == 'nt':  # For Windows OS
-        _ = system('cls')
+    if os_name == "nt":  # For Windows OS
+        _ = system("cls")
     else:
-        _ = system('clear')
+        _ = system("clear")
 
 
 class MenuItem:
@@ -52,7 +52,8 @@ class Menu:
                 return item
         print("Sorry that item is not available.")
 
-    def print_menu_banner(self):
+    @staticmethod
+    def print_menu_banner():
         print("========= Welcome to the Coffee Shop Program =========")
         center_logo = logo.center(20)
         print(center_logo)
@@ -65,14 +66,14 @@ class Menu:
         user_selection = input("\nSelection: ")
         clear()  # clears the terminal
         # TODO - add try/except and logs
-        for key, value in menu_options.items():
-            if user_selection == key[0]:
+        for key in menu_options:
+            if key == "1" and key == user_selection:
                 print("Please Select a Beverage:")
                 print(self.get_items())
-            elif user_selection == key[1]:
+            elif key == "2" and key == user_selection:
                 order_name = input("Please enter the name of drink: ")
                 self.find_drink(order_name)
-            elif user_selection == key[2]:
+            elif key == "3" and key == user_selection:
                 ...
-            elif user_selection == key[3]:
+            elif key == "4" and key == user_selection:
                 ...
