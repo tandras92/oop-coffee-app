@@ -36,6 +36,12 @@ class Menu:
             "4": "Quit",
         }
 
+    @staticmethod
+    def print_menu_banner():
+        print("========= Welcome to the Coffee Shop Program =========")
+        center_logo = logo.center(20)
+        print(center_logo)
+
     def get_items(self):
         """Returns all the names of the available menu items"""
         options = ""
@@ -52,28 +58,29 @@ class Menu:
                 return item
         print("Sorry that item is not available.")
 
-    @staticmethod
-    def print_menu_banner():
-        print("========= Welcome to the Coffee Shop Program =========")
-        center_logo = logo.center(20)
-        print(center_logo)
-
     def menu_selection(self):
         print("Please select from the following options:")
         menu_options = self.options
+        menu_items = self.get_items()
         for k, v in menu_options.items():
             print(f"{k}. {v}")
         user_selection = input("\nSelection: ")
         clear()  # clears the terminal
         # TODO - add try/except and logs
-        for key in menu_options:
-            if key == "1" and key == user_selection:
+        for option in menu_options:
+            if option == "1" and option == user_selection:
                 print("Please Select a Beverage:")
-                print(self.get_items())
-            elif key == "2" and key == user_selection:
+                print(menu_items)
+                beverage_choice = input("\nSelection: ")
+                for drink_option in menu_items:
+                    if drink_option == "1" and drink_option == beverage_choice:
+                        ...
+            elif option == "2" and option == user_selection:
                 order_name = input("Please enter the name of drink: ")
                 self.find_drink(order_name)
-            elif key == "3" and key == user_selection:
+            elif option == "3" and option == user_selection:
                 ...
-            elif key == "4" and key == user_selection:
+            elif option == "4" and option == user_selection:
+                ...
+            else:
                 ...
