@@ -86,8 +86,9 @@ class Menu:
                     elif drink_option == "3" and drink_option == beverage_choice:
                         return option_dict.get('3')
             elif option == "2" and option == user_selection:
-                order_name = input("Please enter the name of drink: ")
-                self.find_drink(order_name)
+                order = input("Please enter the name of drink: ")
+                self.find_drink(order)
+                return order
             elif option == "3" and option == user_selection:
                 ...
             elif option == "4" and option == user_selection:
