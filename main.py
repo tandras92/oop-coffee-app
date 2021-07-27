@@ -1,4 +1,4 @@
-from menu import Menu, MenuItem
+from menu import Menu
 from coffee_maker import CoffeeMaker
 from cash_register import CashRegister
 
