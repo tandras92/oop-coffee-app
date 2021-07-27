@@ -1,6 +1,7 @@
 from art import logo
 from os import system
 from os import name as os_name
+from sys import exit
 
 
 def clear():
@@ -33,8 +34,7 @@ class Menu:
         self.options = {
             "1": "View Menu",
             "2": "Search Drinks",
-            "3": "Print Receipt",
-            "4": "Quit",
+            "3": "Quit"
         }
 
     @staticmethod
@@ -62,36 +62,44 @@ class Menu:
 
     def menu_selection(self):
         """Asks user to select an option from the menu"""
-        print("Please select from the following options:")
-        menu_options = self.options
-        menu_items = self.get_items()
-        for k, v in menu_options.items():
-            print(f"{k}. {v}")
-        user_selection = input("\nSelection: ")
-        clear()  # clears the terminal
-        # TODO - add try/except and logs
-        for option in menu_options:
-            if option == "1" and option == user_selection:
-                print("Please Select a Beverage:")
-                # convert list to dict
-                option_dict = dict(zip(menu_items[::2], menu_items[1::2]))
-                for k, v in option_dict.items():
-                    print(f"{k}. {v}")
-                beverage_choice = input("\nSelection: ")
-                for drink_option in option_dict:
-                    if drink_option == "1" and drink_option == beverage_choice:
-                        return option_dict.get('1')
-                    elif drink_option == "2" and drink_option == beverage_choice:
-                        return option_dict.get('2')
-                    elif drink_option == "3" and drink_option == beverage_choice:
-                        return option_dict.get('3')
-            elif option == "2" and option == user_selection:
-                order = input("Please enter the name of drink: ")
-                self.find_drink(order)
-                return order
-            elif option == "3" and option == user_selection:
-                ...
-            elif option == "4" and option == user_selection:
-                ...
-            else:
-                ...
+        keep_going = True
+        while keep_going:
+            print("Please select from the following options:")
+            menu_options = self.options
+            menu_items = self.get_items()
+            for k, v in menu_options.items():
+                print(f"{k}. {v}")
+            user_selection = input("\nSelection: ")
+            clear()  # clears the terminal
+            # TODO - add try/except and logs
+            for option in menu_options:
+                if option == "1" and option == user_selection:
+                    # select a drink
+                    print("Please Select a Beverage:")
+                    # convert list to dict
+                    option_dict = dict(zip(menu_items[::2], menu_items[1::2]))
+                    for k, v in option_dict.items():
+                        print(f"{k}. {v}")
+                    beverage_choice = input("\nSelection: ")
+                    for drink_option in option_dict:
+                        if drink_option == "1" and drink_option == beverage_choice:
+                            return option_dict.get('1')
+                        elif drink_option == "2" and drink_option == beverage_choice:
+                            return option_dict.get('2')
+                        elif drink_option == "3" and drink_option == beverage_choice:
+                            return option_dict.get('3')
+                elif option == "2" and option == user_selection:
+                    # find drink
+                    order = input("Please enter the name of drink: ")
+                    self.find_drink(order)
+                    return order
+                elif option == "3" and option == user_selection:
+                    # quit program
+                    user_input = input("Are you sure you want to quit? Press y/n\n").lower()
+                    if user_input == 'y':
+                        keep_going = False
+                        exit(0)
+                    else:
+                        clear()
+                else:
+                    ...
