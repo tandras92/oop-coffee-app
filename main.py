@@ -1,6 +1,6 @@
 from menu import Menu, MenuItem
 from coffee_maker import CoffeeMaker
-from money_machine import MoneyMachine
+from cash_register import CashRegister
 
 drink_menu = Menu()
 
@@ -20,31 +20,31 @@ def is_drink_available(drink_name):
 def process_order():
     selected_drink = Menu()
     coffee_maker = CoffeeMaker()
-    money_machine = MoneyMachine()
+    cash_register = CashRegister()
     ordered_drink = selected_drink.menu_selection()  # returns a drink
     drink_to_make = is_drink_available(ordered_drink)
 
     if ordered_drink == "latte" or drink_to_make is not None:
         print(f"{ordered_drink}\t\t ${drink_to_make.cost}")
         if coffee_maker.is_resource_sufficient(drink_to_make):
-            f"{money_machine.report()}\n"
-        if money_machine.make_payment(drink_to_make.cost):
+            f"{cash_register.report()}\n"
+        if cash_register.make_payment(drink_to_make.cost):
             coffee_maker.make_coffee(drink_to_make)
-            f"{money_machine.report()}\n"
+            f"{cash_register.report()}\n"
     elif ordered_drink == "espresso" or drink_to_make is not None:
         print(f"{ordered_drink}\t\t ${drink_to_make.cost}")
         if coffee_maker.is_resource_sufficient(drink_to_make):
-            f"{money_machine.report()}\n"
-        if money_machine.make_payment(drink_to_make.cost):
+            f"{cash_register.report()}\n"
+        if cash_register.make_payment(drink_to_make.cost):
             coffee_maker.make_coffee(drink_to_make)
-            f"{money_machine.report()}\n"
+            f"{cash_register.report()}\n"
     elif ordered_drink == "cappuccino":
         print(f"{ordered_drink}\t\t ${drink_to_make.cost}")
         if coffee_maker.is_resource_sufficient(drink_to_make):
-            f"{money_machine.report()}\n"
-        if money_machine.make_payment(drink_to_make.cost):
+            f"{cash_register.report()}\n"
+        if cash_register.make_payment(drink_to_make.cost):
             coffee_maker.make_coffee(drink_to_make)
-            f"{money_machine.report()}\n"
+            f"{cash_register.report()}\n"
     else:
         ...
 
