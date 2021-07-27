@@ -22,40 +22,31 @@ def process_order():
     coffee_maker = CoffeeMaker()
     money_machine = MoneyMachine()
     ordered_drink = selected_drink.menu_selection()  # returns a drink
+    drink_to_make = is_drink_available(ordered_drink)
 
-    while True:
-        if ordered_drink == "latte":
-            latte = is_drink_available(ordered_drink)
-            if latte:
-                print(f"{ordered_drink}\t\t ${latte.cost}")
-                if coffee_maker.is_resource_sufficient(latte):
-                    f"{money_machine.report()}\n"
-                if money_machine.make_payment(latte.cost):
-                    coffee_maker.make_coffee(latte)
-                    f"{money_machine.report()}\n"
-                    break
-        elif ordered_drink == "espresso":
-            expresso = is_drink_available(ordered_drink)
-            if expresso:
-                print(f"{ordered_drink}\t\t ${expresso.cost}")
-                if coffee_maker.is_resource_sufficient(expresso):
-                    f"{money_machine.report()}\n"
-                if money_machine.make_payment(expresso.cost):
-                    coffee_maker.make_coffee(expresso)
-                    f"{money_machine.report()}\n"
-                    break
-        elif ordered_drink == "cappuccino":
-            cappuccino = is_drink_available(ordered_drink)
-            if cappuccino:
-                print(f"{ordered_drink}\t\t ${cappuccino.cost}")
-                if coffee_maker.is_resource_sufficient(cappuccino):
-                    f"{money_machine.report()}\n"
-                if money_machine.make_payment(cappuccino.cost):
-                    coffee_maker.make_coffee(cappuccino)
-                    f"{money_machine.report()}\n"
-                    break
-        else:
-            ...
+    if ordered_drink == "latte" or drink_to_make is not None:
+        print(f"{ordered_drink}\t\t ${drink_to_make.cost}")
+        if coffee_maker.is_resource_sufficient(drink_to_make):
+            f"{money_machine.report()}\n"
+        if money_machine.make_payment(drink_to_make.cost):
+            coffee_maker.make_coffee(drink_to_make)
+            f"{money_machine.report()}\n"
+    elif ordered_drink == "espresso" or drink_to_make is not None:
+        print(f"{ordered_drink}\t\t ${drink_to_make.cost}")
+        if coffee_maker.is_resource_sufficient(drink_to_make):
+            f"{money_machine.report()}\n"
+        if money_machine.make_payment(drink_to_make.cost):
+            coffee_maker.make_coffee(drink_to_make)
+            f"{money_machine.report()}\n"
+    elif ordered_drink == "cappuccino":
+        print(f"{ordered_drink}\t\t ${drink_to_make.cost}")
+        if coffee_maker.is_resource_sufficient(drink_to_make):
+            f"{money_machine.report()}\n"
+        if money_machine.make_payment(drink_to_make.cost):
+            coffee_maker.make_coffee(drink_to_make)
+            f"{money_machine.report()}\n"
+    else:
+        ...
 
 
 if __name__ == '__main__':
